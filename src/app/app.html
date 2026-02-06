@@ -1,0 +1,48 @@
+<div
+  style="padding: 30px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 500px; margin: auto;">
+
+  <h2 style="color: #333; border-bottom: 2px solid #333; padding-bottom: 10px;">Simple Offline Sync</h2>
+
+  <div style="margin: 20px 0; display: flex; gap: 10px;">
+    <input #msgInput type="text" placeholder="Enter message..."
+      style="padding: 10px; border: 1px solid #ccc; border-radius: 8px; flex: 1; outline: none;">
+    <button (click)="addFakeRequest(msgInput.value); msgInput.value = ''"
+      style="padding: 10px 20px; background-color: #000; color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: opacity 0.2s;">
+      Send
+    </button>
+  </div>
+
+  <div *ngIf="isDuplicate"
+    style="color: #e67e22; font-weight: bold; margin-bottom: 15px; padding: 10px; background: #fff5eb; border-radius: 8px; border: 1px solid #ffe8cc;">
+    Duplicate Detected! This request was ignored.
+  </div>
+
+  <div style="background: #f9f9f9; padding: 15px; border-radius: 12px; font-size: 0.9em; line-height: 1.6;">
+    <p style="margin: 5px 0;">
+      Network:
+      <strong [style.color]="(online$ | async) ? '#27ae60' : '#e74c3c'">
+        {{ (online$ | async) ? '● ONLINE' : '● OFFLINE' }}
+      </strong>
+    </p>
+
+    <p style="margin: 5px 0;">
+      Pending (to be synced):
+      <strong style="color: #2980b9;">{{ (queue$ | async)?.length }}</strong>
+    </p>
+
+    <p *ngIf="syncing$ | async" style="color: #3498db; margin: 5px 0; font-weight: bold;">
+      Syncing...
+    </p>
+  </div>
+
+  <hr style="margin: 25px 0; border: none; border-top: 1px solid #eee;">
+
+  <h3 style="color: #444; font-size: 1.1em;">Live Messages (Real-time)</h3>
+  <ul style="list-style: none; padding: 0;">
+    <li *ngFor="let msg of messages"
+      style="padding: 10px; margin-bottom: 8px; background: #fff; border: 1px solid #eee; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+      {{ msg.title }}
+    </li>
+  </ul>
+
+</div>
