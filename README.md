@@ -66,3 +66,9 @@ this.offlineSync.isSyncing$();
 
 - **Target API**: Currently demonstrated using `jsonplaceholder.typicode.com`.
 - **Storage Key**: Managed internally via `STORAGE_KEY`.
+
+
+
+
+Video ==> https://github.com/user-attachments/assets/cc2c15b3-5367-4a5a-903e-96df4a8bec29
+
